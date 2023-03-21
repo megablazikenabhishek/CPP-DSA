@@ -26,7 +26,28 @@ ll recur(ll indx, ll w, vpl &arr, vvl &dp)
 
     return dp[indx][w] = max(no, take);
 }
+ll table(vpl arr, ll n, ll w)
+{
+    vvl dp(n, vl(w + 1, 0));
+    for (int i = 0; i < n; i++)
+        dp[i][0] = 0;
 
+    for (int i = arr[0].second; i <= w; i++)
+        dp[0][i] = arr[0].first;
+
+    for (int indx = 1; indx < n; indx++)
+    {
+        for (int j = 0; j <= w; j++)
+        {
+            ll no = dp[indx - 1][j];
+            // take
+            ll take = arr[indx].second <= j ? dp[indx - 1][j - arr[indx].second] + arr[indx].first : INT_MIN;
+
+            dp[indx][j] = max(no, take);
+        }
+    }
+    return dp[n - 1][w];
+}
 void solve()
 {
     ll n;
@@ -40,8 +61,9 @@ void solve()
     ll w;
     cin >> w;
 
-    vvl dp(n, vl(w + 1, -1));
-    cout << recur(n - 1, w, arr, dp) << endl;
+    // vvl dp(n, vl(w + 1, -1));
+    // cout << recur(n - 1, w, arr, dp) << endl;
+    cout << table(arr, n, w) << endl;
 }
 
 int main()
