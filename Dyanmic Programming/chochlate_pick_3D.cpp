@@ -79,9 +79,9 @@ void solve()
         for (auto &j : i)
             cin >> j;
 
-    // vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(m, -1)));
-    // cout << recur(arr, 0, 0, m - 1, dp) << endl;
-    cout << table(arr, n, m) << endl;
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(m, -1)));
+    cout << recur(arr, 0, 0, m - 1, dp) << endl;
+    // cout << table(arr, n, m) << endl;
 }
 
 int main()
